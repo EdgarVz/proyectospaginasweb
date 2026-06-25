@@ -6,6 +6,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Form, Query, Request
 from fastapi.responses import HTMLResponse, Response
 from fastapi.templating import Jinja2Templates
+from jinja2 import Environment, FileSystemLoader
 import os
 
 from leadfinder.analyzer import Analyzer
@@ -13,7 +14,9 @@ from leadfinder.config import settings
 from leadfinder.database import Database
 from leadfinder.scraper import Scraper
 
-templates = Jinja2Templates(directory=os.path.join(os.path.dirname(__file__), "templates"))
+templates_dir = os.path.join(os.path.dirname(__file__), "templates")
+env = Environment(loader=FileSystemLoader(templates_dir), autoescape=True, cache_size=0)
+templates = Jinja2Templates(env=env)
 db: Database = None
 
 
@@ -32,7 +35,7 @@ app = FastAPI(title="LeadFinder", lifespan=lifespan)
 @app.get("/", response_class=HTMLResponse)
 async def dashboard(request: Request):
     summary = await db.get_summary()
-    return templates.TemplateResponse("dashboard.html", {"request": request, "summary": summary})
+    return templates.TemplateResponse(request, "dashboard.html", {"summary": summary})
 
 
 @app.get("/leads", response_class=HTMLResponse)
@@ -61,7 +64,7 @@ async def leads_list(
 
     enriched.sort(key=lambda b: (b["lead_score"] is None, -(b["lead_score"] or 0)))
 
-    return templates.TemplateResponse("leads.html", {"request": request, "leads": enriched})
+    return templates.TemplateResponse(request, "leads.html", {"leads": enriched})
 
 
 @app.get("/leads/{lead_id}", response_class=HTMLResponse)
@@ -79,8 +82,8 @@ async def lead_detail(request: Request, lead_id: int):
         metrics = await db.get_metrics(audit["id"])
 
     return templates.TemplateResponse(
-        "lead_detail.html",
-        {"request": request, "business": business, "audit": audit, "metrics": metrics},
+        request, "lead_detail.html",
+        {"business": business, "audit": audit, "metrics": metrics},
     )
 
 
@@ -113,7 +116,7 @@ async def export_leads():
 @app.get("/campaigns", response_class=HTMLResponse)
 async def campaigns_list(request: Request):
     campaigns = await db.get_campaigns()
-    return templates.TemplateResponse("campaigns.html", {"request": request, "campaigns": campaigns})
+    return templates.TemplateResponse(request, "campaigns.html", {"campaigns": campaigns})
 
 
 @app.post("/campaigns/new")
@@ -157,8 +160,8 @@ async def campaign_detail(request: Request, campaign_id: int):
 
     businesses = await db.get_businesses(campaign_id=campaign_id)
     return templates.TemplateResponse(
-        "campaign_detail.html",
-        {"request": request, "campaign": campaign, "businesses": businesses},
+        request, "campaign_detail.html",
+        {"campaign": campaign, "businesses": businesses},
     )
 
 

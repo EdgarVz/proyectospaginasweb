@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charters Mochima · Paseos en Lancha | Hotel Aqua Vi</title>
+<meta name="description" content="Paseos en lancha y yates por el Parque Nacional Mochima desde Puerto La Cruz. El Saco, El Faro, Bahía del Silencio, Isla de Plata. Charters privados.">
+<meta property="og:title" content="Charters Mochima · Hotel Aqua Vi">
+<meta property="og:description" content="Paseos en lancha por el Parque Nacional Mochima. Charters privados desde nuestra marina.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1200">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0f1b2d; --teal: #1a7a8a; --gold: #e8a838;
+  --sand: #f5efe6; --cream: #faf8f5; --white: #ffffff;
+  --text: #2d3436; --text-light: #636e72;
+  --border: #e0e0e0; --shadow: 0 4px 20px rgba(0,0,0,.08);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,.12);
+  --radius: 12px; --radius-sm: 8px;
+  --transition: .3s cubic-bezier(.4,0,.2,1);
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); color: var(--text); background: var(--cream); line-height: 1.6; }
+a { text-decoration: none; color: inherit; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 32px; border-radius: var(--radius-sm);
+  font-family: var(--font-sans); font-weight: 600; font-size: 15px;
+  border: none; cursor: pointer; transition: var(--transition);
+}
+.btn-primary { background: var(--gold); color: var(--navy); }
+.btn-primary:hover { background: #d49430; transform: translateY(-2px); box-shadow: var(--shadow); }
+.btn-whatsapp { background: #25D366; color: var(--white); }
+.btn-whatsapp:hover { background: #1da851; transform: translateY(-2px); box-shadow: var(--shadow); }
+.btn-outline-light { background: transparent; border: 2px solid rgba(255,255,255,.6); color: var(--white); }
+.btn-outline-light:hover { background: var(--white); color: var(--navy); }
+.section-label {
+  display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--teal); margin-bottom: 12px;
+}
+.section-title {
+  font-family: var(--font-serif); font-size: clamp(28px,4vw,42px);
+  color: var(--navy); margin-bottom: 16px; line-height: 1.2;
+}
+.section-sub { font-size: 16px; color: var(--text-light); max-width: 600px; line-height: 1.7; }
+
+/* Header */
+.header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 14px 0; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; }
+.header-logo { display: flex; align-items: center; gap: 10px; color: var(--white); }
+.header-logo span { font-family: var(--font-serif); font-size: 20px; font-weight: 600; }
+.header-nav { display: flex; align-items: center; gap: 24px; }
+.header-nav a { color: rgba(255,255,255,.8); font-size: 14px; font-weight: 500; transition: var(--transition); }
+.header-nav a:hover { color: var(--gold); }
+.header-nav .btn { padding: 8px 20px; font-size: 13px; }
+
+/* Hero */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  background: linear-gradient(135deg, #0f1b2d 0%, #1a4a5a 100%);
+  position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; opacity: .3;
+  background: url('https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1920&q=80') center/cover;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(15,27,45,.8) 0%, rgba(26,74,90,.4) 100%);
+}
+.hero-content { position: relative; z-index: 2; width: 100%; padding: 120px 0 80px; }
+.hero-text { max-width: 640px; }
+.hero h1 {
+  font-family: var(--font-serif); font-size: clamp(36px,6vw,60px);
+  color: var(--white); line-height: 1.1; margin-bottom: 16px;
+}
+.hero h1 span { color: var(--gold); }
+.hero p { font-size: 18px; color: rgba(255,255,255,.75); max-width: 480px; line-height: 1.7; margin-bottom: 32px; }
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.hero-stats { display: flex; gap: 48px; margin-top: 48px; }
+.hero-stat { color: var(--white); }
+.hero-stat .num { font-family: var(--font-serif); font-size: 36px; font-weight: 700; color: var(--gold); }
+.hero-stat .label { font-size: 13px; opacity: .7; }
+
+/* Tours */
+.tours { padding: 80px 0; background: var(--white); }
+.tours-header { text-align: center; margin-bottom: 48px; }
+.tours-header .section-sub { margin: 0 auto; }
+.tours-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px,1fr)); gap: 32px; }
+.tour-card {
+  border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--border); transition: var(--transition);
+}
+.tour-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.tour-card-img {
+  height: 240px; background-size: cover; background-position: center;
+  position: relative;
+}
+.tour-card-badge {
+  position: absolute; top: 16px; left: 16px;
+  padding: 6px 14px; border-radius: 50px; font-size: 12px; font-weight: 600;
+  background: var(--gold); color: var(--navy);
+}
+.tour-card-body { padding: 28px; }
+.tour-card-body h3 { font-family: var(--font-serif); font-size: 22px; color: var(--navy); margin-bottom: 8px; }
+.tour-card-body .duration { font-size: 14px; color: var(--teal); font-weight: 600; margin-bottom: 12px; }
+.tour-card-body p { font-size: 14px; color: var(--text-light); line-height: 1.7; margin-bottom: 16px; }
+.tour-destinations { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.tour-destinations span {
+  padding: 4px 10px; border-radius: 50px; font-size: 12px;
+  background: var(--sand); color: var(--text);
+}
+.tour-card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 28px; border-top: 1px solid var(--border);
+}
+.tour-price { font-size: 14px; color: var(--text-light); }
+.tour-price strong { font-family: var(--font-serif); font-size: 28px; color: var(--teal); }
+.tour-card-footer .btn { padding: 10px 24px; font-size: 13px; }
+
+/* Gallery Section */
+.gallery-section { padding: 80px 0; background: var(--sand); }
+.gallery-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 4px; margin-top: 40px; }
+.gallery-item {
+  aspect-ratio: 1; background-size: cover; background-position: center;
+  cursor: pointer; transition: var(--transition); position: relative; overflow: hidden;
+}
+.gallery-item:hover { transform: scale(1.03); z-index: 2; box-shadow: var(--shadow-lg); }
+
+/* Why Section */
+.why-section { padding: 80px 0; }
+.why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 32px; margin-top: 40px; }
+.why-card { text-align: center; padding: 32px 20px; }
+.why-card .icon {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--sand); display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px;
+}
+.why-card h3 { font-family: var(--font-serif); font-size: 20px; color: var(--navy); margin-bottom: 8px; }
+.why-card p { font-size: 14px; color: var(--text-light); line-height: 1.7; }
+
+/* CTA */
+.cta-section {
+  padding: 80px 0; text-align: center;
+  background: linear-gradient(135deg, var(--navy) 0%, #1a4a5a 100%);
+  color: var(--white); position: relative; overflow: hidden;
+}
+.cta-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80') center/cover;
+  opacity: .1;
+}
+.cta-section .container { position: relative; z-index: 2; }
+.cta-section h2 { font-family: var(--font-serif); font-size: clamp(28px,4vw,42px); margin-bottom: 12px; }
+.cta-section p { opacity: .75; margin-bottom: 32px; font-size: 17px; }
+.cta-section .btn { font-size: 17px; padding: 16px 40px; }
+
+/* Footer */
+.footer { background: var(--navy); color: rgba(255,255,255,.7); padding: 60px 0 0; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+.footer-brand h3 { font-family: var(--font-serif); color: var(--white); font-size: 22px; margin-bottom: 12px; }
+.footer-brand p { font-size: 14px; line-height: 1.7; max-width: 320px; }
+.footer-col h4 { color: var(--white); font-size: 14px; font-weight: 600; margin-bottom: 16px; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 8px; }
+.footer-col ul li a { font-size: 14px; transition: var(--transition); }
+.footer-col ul li a:hover { color: var(--gold); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,.1); padding: 20px 0; display: flex; justify-content: space-between; font-size: 13px; }
+
+.whatsapp-float {
+  position: fixed; bottom: 24px; right: 24px; z-index: 999;
+  width: 60px; height: 60px; border-radius: 50%;
+  background: #25D366; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,.4);
+  transition: var(--transition); cursor: pointer;
+}
+.whatsapp-float:hover { transform: scale(1.1); }
+
+@media (max-width: 1024px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 768px) {
+  .header-nav { display: none; }
+  .hero-stats { flex-direction: column; gap: 20px; }
+  .tours-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 480px) {
+  .hero-actions { flex-direction: column; }
+  .why-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header-inner">
+    <a href="index.html" class="header-logo">
+      <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
+        <rect width="36" height="36" rx="8" fill="#e8a838"/>
+        <path d="M10 24V14l8-6 8 6v10h-4v-6H14v6h-4z" fill="#0f1b2d"/>
+        <rect x="16" y="18" width="4" height="6" fill="#e8a838"/>
+      </svg>
+      <span>Aqua Vi</span>
+    </a>
+    <nav class="header-nav">
+      <a href="index.html">Inicio</a>
+      <a href="#">Habitaciones</a>
+      <a href="#">Marina</a>
+      <a href="#">Contacto</a>
+      <a href="index.html" class="btn btn-primary">Reservar</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="container">
+      <div class="hero-text">
+        <div style="color:var(--gold);font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;">Charters & Tours</div>
+        <h1>Navega por el <span>Parque Nacional Mochima</span></h1>
+        <p>Desde nuestra marina privada, zarpa hacia las playas más bellas del Caribe venezolano. Lanchas y yates disponibles.</p>
+        <div class="hero-actions">
+          <a href="https://wa.me/584248313091" class="btn btn-whatsapp" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M10 0C4.48 0 0 4.48 0 10c0 2.06.63 3.98 1.7 5.58L.55 18.93l3.46-1.12A9.95 9.95 0 0010 20c5.52 0 10-4.48 10-10S15.52 0 10 0z"/></svg>
+            Reservar por WhatsApp
+          </a>
+          <a href="#tours" class="btn btn-outline-light">Ver paquetes</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="num">40+</div><div class="label">Embarcaciones</div></div>
+          <div class="hero-stat"><div class="num">12</div><div class="label">Playas y destinos</div></div>
+          <div class="hero-stat"><div class="num">300m</div><div class="label">Muelle privado</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tours -->
+<section class="tours" id="tours">
+  <div class="container">
+    <div class="tours-header">
+      <div class="section-label">Paquetes</div>
+      <h2 class="section-title">Elige tu experiencia</h2>
+      <p class="section-sub">Todos los tours salen desde la Marina Aqua Vi, incluimos capitán, combustible y hielo.</p>
+    </div>
+    <div class="tours-grid">
+
+      <div class="tour-card">
+        <div class="tour-card-img" style="background-image:url('https://images.unsplash.com/photo-1598887133694-0c7c18fea8ae?w=600&q=80')">
+          <span class="tour-card-badge">Más popular</span>
+        </div>
+        <div class="tour-card-body">
+          <h3>Mochima Express</h3>
+          <div class="duration">⏱ 4 horas</div>
+          <p>Recorre las mejores playas de Mochima: El Saco, Bahía del Silencio y El Faro. Incluye parada para nadar y snorkel.</p>
+          <div class="tour-destinations">
+            <span>El Saco</span><span>Bahía del Silencio</span><span>El Faro</span><span>Snorkel</span>
+          </div>
+        </div>
+        <div class="tour-card-footer">
+          <div class="tour-price">Desde <strong>$40</strong> / persona</div>
+          <a href="https://wa.me/584248313091" class="btn btn-whatsapp" target="_blank">Reservar</a>
+        </div>
+      </div>
+
+      <div class="tour-card">
+        <div class="tour-card-img" style="background-image:url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=600&q=80')">
+          <span class="tour-card-badge" style="background:var(--teal);color:var(--white);">Full day</span>
+        </div>
+        <div class="tour-card-body">
+          <h3>Isla de Plata + Playuelas</h3>
+          <div class="duration">⏱ 6 horas</div>
+          <p>Tour completo a las islas más hermosas. Playas de arena blanca, aguas cristalinas y almuerzo criollo incluido.</p>
+          <div class="tour-destinations">
+            <span>Isla de Plata</span><span>Playuelas</span><span>Almuerzo</span><span>Snorkel</span>
+          </div>
+        </div>
+        <div class="tour-card-footer">
+          <div class="tour-price">Desde <strong>$65</strong> / persona</div>
+          <a href="https://wa.me/584248313091" class="btn btn-whatsapp" target="_blank">Reservar</a>
+        </div>
+      </div>
+
+      <div class="tour-card">
+        <div class="tour-card-img" style="background-image:url('https://images.unsplash.com/photo-1563794882847-ea176c186f5a?w=600&q=80')">
+          <span class="tour-card-badge" style="background:var(--navy);color:var(--white);">Yate</span>
+        </div>
+        <div class="tour-card-body">
+          <h3>Yate Privado · Charter Exclusivo</h3>
+          <div class="duration">⏱ 8 horas</div>
+          <p>Renta un yate con tripulación para ti y tus acompañantes. Ruta personalizada, comida a bordo y atención VIP.</p>
+          <div class="tour-destinations">
+            <span>Privado</span><span>Personalizado</span><span>Comida a bordo</span><span>VIP</span>
+          </div>
+        </div>
+        <div class="tour-card-footer">
+          <div class="tour-price">Desde <strong>$350</strong> / yate</div>
+          <a href="https://wa.me/584248313091" class="btn btn-whatsapp" target="_blank">Consultar</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Why -->
+<section class="why-section">
+  <div class="container">
+    <div class="tours-header">
+      <div class="section-label">Por qué nosotros</div>
+      <h2 class="section-title">Tu aventura comienza aquí</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 14h20M14 4v20" stroke="#1a7a8a" stroke-width="2"/><circle cx="14" cy="14" r="12" stroke="#1a7a8a" stroke-width="2"/></svg>
+        </div>
+        <h3>Marina privada</h3>
+        <p>Zarpas directamente desde nuestro muelle, sin esperas ni traslados.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 2v24M2 14h24" stroke="#1a7a8a" stroke-width="2"/><circle cx="14" cy="14" r="10" stroke="#1a7a8a" stroke-width="2"/></svg>
+        </div>
+        <h3>Capitanes locales</h3>
+        <p>Guías expertos que conocen cada rincón del Parque Mochima.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M4 14l6 6L22 8" stroke="#1a7a8a" stroke-width="2.5" stroke-linecap="round"/><circle cx="14" cy="14" r="12" stroke="#1a7a8a" stroke-width="2"/></svg>
+        </div>
+        <h3>Seguridad garantizada</h3>
+        <p>Embarcaciones equipadas con chalecos, radio y todos los permisos.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 2L4 8v4c0 6 4 12 10 14 6-2 10-8 10-14V8L14 2z" stroke="#1a7a8a" stroke-width="2"/></svg>
+        </div>
+        <h3>Precio justo</h3>
+        <p>Sin comisiones de terceros. Reserva directa al mejor precio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section class="gallery-section">
+  <div class="container">
+    <div class="tours-header">
+      <div class="section-label">Galería</div>
+      <h2 class="section-title">Mochima en imágenes</h2>
+    </div>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1598887133694-0c7c18fea8ae?w=400&q=80')"></div>
+    <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&q=80')"></div>
+    <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=400&q=80')"></div>
+    <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=400&q=80')"></div>
+    <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1563794882847-ea176c186f5a?w=400&q=80')"></div>
+    <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1575547743530-64c2b1f3163c?w=400&q=80')"></div>
+    <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?w=400&q=80')"></div>
+    <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=400&q=80')"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>¿Listo para navegar?</h2>
+    <p>Reserva tu paseo por WhatsApp y asegura tu cupo. Grupos disponibles.</p>
+    <a href="https://wa.me/584248313091" class="btn btn-whatsapp" target="_blank">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor"><path d="M11 0C4.93 0 0 4.93 0 11c0 2.17.63 4.2 1.72 5.9L.22 20.78l3.98-1.3A10.94 10.94 0 0011 22c6.07 0 11-4.93 11-11S17.07 0 11 0z"/></svg>
+      Escribir por WhatsApp — 0424 831 30 91
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Hotel Aqua Vi</h3>
+        <p>Marina & Suites. Charters al Parque Nacional Mochima desde Puerto La Cruz.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Enlaces</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="#">Habitaciones</a></li>
+          <li><a href="#">Marina</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Destinos</h4>
+        <ul>
+          <li><a href="#">El Saco</a></li>
+          <li><a href="#">Isla de Plata</a></li>
+          <li><a href="#">Playuelas</a></li>
+          <li><a href="#">Bahía del Silencio</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="tel:+582814202708">0281 420 27 08</a></li>
+          <li><a href="https://wa.me/584248313091">0424 831 30 91</a></li>
+          <li><a href="mailto:aquavireservaciones@gmail.com">aquavireservaciones@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Hotel Aqua Vi · Marina & Suites</span>
+      <span>Av. R19 Norte, Sector Aguavillas, Puerto La Cruz</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/584248313091" class="whatsapp-float" target="_blank" rel="noopener">
+  <svg width="28" height="28" viewBox="0 0 28 28" fill="white"><path d="M14 0C6.27 0 0 6.27 0 14c0 2.88.87 5.56 2.36 7.78L.82 26.47l4.8-1.57A13.93 13.93 0 0014 28c7.73 0 14-6.27 14-14S21.73 0 14 0z"/></svg>
+</a>
+
+</body>
+</html>

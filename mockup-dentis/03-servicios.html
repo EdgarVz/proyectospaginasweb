@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Servicios - Centro Odontológico Dentis</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: #1a1a2e; background: #fff; line-height: 1.6; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+  .header { background: #fff; border-bottom: 1px solid #eef2f6; padding: 1rem 0; position: sticky; top: 0; z-index: 100; }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+  .logo-icon { width: 42px; height: 42px; background: linear-gradient(135deg, #2c7cb0, #1a5f8a); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.3rem; }
+  .logo-text { font-weight: 800; font-size: 1.4rem; color: #1a1a2e; }
+  .logo-text span { color: #2c7cb0; }
+  .logo-slogan { font-size: 0.7rem; color: #888; letter-spacing: 0.5px; }
+  .nav { display: flex; gap: 2rem; align-items: center; }
+  .nav a { text-decoration: none; color: #444; font-weight: 500; font-size: 0.95rem; transition: color 0.2s; }
+  .nav a:hover { color: #2c7cb0; }
+  .nav a.active { color: #2c7cb0; }
+  .btn-whatsapp { display: inline-flex; align-items: center; gap: 0.5rem; background: #25D366; color: white !important; padding: 0.6rem 1.3rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; text-decoration: none; }
+  .btn-whatsapp:hover { opacity: 0.9; }
+
+  .page-header { background: linear-gradient(135deg, #f0f7fb 0%, #e3eef8 100%); padding: 4rem 0; text-align: center; }
+  .page-header h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.75rem; }
+  .page-header h1 span { color: #2c7cb0; }
+  .page-header p { color: #555; font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+  .section { padding: 5rem 0; }
+  .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; }
+  .section-subtitle { color: #666; max-width: 600px; margin-bottom: 3rem; }
+
+  .service-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; padding: 3rem 0; border-bottom: 1px solid #eef2f6; }
+  .service-detail:last-child { border-bottom: none; }
+  .service-detail.reverse { direction: rtl; }
+  .service-detail.reverse > * { direction: ltr; }
+  .service-info .icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .service-info h3 { font-size: 1.5rem; margin-bottom: 0.75rem; color: #1a1a2e; }
+  .service-info p { color: #555; margin-bottom: 1rem; }
+  .service-info ul { list-style: none; }
+  .service-info ul li { padding: 0.4rem 0; display: flex; align-items: center; gap: 0.6rem; color: #444; font-size: 0.95rem; }
+  .service-info ul li::before { content: "✓"; color: #2c7cb0; font-weight: 700; }
+  .service-image { background: linear-gradient(135deg, #e3eef8, #d6e6f4); border-radius: 20px; min-height: 280px; display: flex; align-items: center; justify-content: center; font-size: 5rem; }
+
+  .cta { background: linear-gradient(135deg, #2c7cb0, #1a5f8a); color: white; text-align: center; padding: 4rem 0; }
+  .cta h2 { font-size: 2rem; margin-bottom: 1rem; }
+  .cta p { opacity: 0.9; margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .btn-cta { display: inline-flex; align-items: center; gap: 0.5rem; background: white; color: #2c7cb0; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem; transition: transform 0.2s; }
+  .btn-cta:hover { transform: scale(1.05); }
+
+  .footer { background: #1a1a2e; color: #ccc; padding: 4rem 0 2rem; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer h4 { color: white; font-size: 1rem; margin-bottom: 1.25rem; }
+  .footer p, .footer a { font-size: 0.9rem; color: #999; text-decoration: none; }
+  .footer a:hover { color: #5bb5e8; }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 0.6rem; }
+  .footer-bottom { border-top: 1px solid #333; padding-top: 1.5rem; text-align: center; font-size: 0.85rem; color: #666; }
+
+  .whatsapp-float { position: fixed; bottom: 1.5rem; right: 1.5rem; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 4px 16px rgba(37,211,102,0.35); text-decoration: none; z-index: 1000; transition: transform 0.2s; }
+  .whatsapp-float:hover { transform: scale(1.1); }
+
+  @media (max-width: 768px) {
+    .service-detail, .service-detail.reverse { grid-template-columns: 1fr; direction: ltr; }
+    .service-detail.reverse > * { direction: ltr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">🦷</div>
+      <div>
+        <div class="logo-text">CENTRO <span>DENTIS</span></div>
+        <div class="logo-slogan">Te Hace Sonreír</div>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="#">Inicio</a>
+      <a href="#" class="active">Servicios</a>
+      <a href="#">Equipo</a>
+      <a href="#">Contacto</a>
+      <a href="#" class="btn-whatsapp">📱 0414-123.45.67</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="container">
+    <h1>Nuestros <span>Servicios</span></h1>
+    <p>En Centro Odontológico Dentis ofrecemos soluciones completas para tu salud bucal, desde chequeos rutinarios hasta tratamientos especializados.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <!-- Service 1 -->
+    <div class="service-detail">
+      <div class="service-info">
+        <div class="icon">🦷</div>
+        <h3>Odontología General</h3>
+        <p>Mantenemos tu salud bucal con chequeos regulares, limpiezas profesionales, calzas y tratamientos preventivos. Nuestro objetivo es detectar y tratar problemas a tiempo.</p>
+        <ul>
+          <li>Chequeos completos con diagnóstico digital</li>
+          <li>Limpiezas profundas (profilaxis)</li>
+          <li>Calzas estéticas y amalgamas</li>
+          <li>Sellantes y fluorizaciones</li>
+        </ul>
+      </div>
+      <div class="service-image">🦷</div>
+    </div>
+
+    <!-- Service 2 -->
+    <div class="service-detail reverse">
+      <div class="service-info">
+        <div class="icon">⭐</div>
+        <h3>Implantes Dentales</h3>
+        <p>Recupera la funcionalidad y estética de tu sonrisa con implantes de titanio de alta calidad. Trabajamos con las mejores casas comerciales para garantizar resultados duraderos.</p>
+        <ul>
+          <li>Implantes unitarios y múltiples</li>
+          <li>All-on-4 y All-on-6</li>
+          <li>Elevación de seno maxilar</li>
+          <li>Injertos óseos</li>
+        </ul>
+      </div>
+      <div class="service-image">⭐</div>
+    </div>
+
+    <!-- Service 3 -->
+    <div class="service-detail">
+      <div class="service-info">
+        <div class="icon">😁</div>
+        <h3>Ortodoncia & Invisalign</h3>
+        <p>Endereza tus dientes de forma cómoda y discreta. Ofrecemos brackets tradicionales y tratamiento Invisalign con aligners transparentes removibles.</p>
+        <ul>
+          <li>Brackets metálicos y estéticos</li>
+          <li>Invisalign (alineadores invisibles)</li>
+          <li>Ortodoncia infantil y adultos</li>
+          <li>Retenedores personalizados</li>
+        </ul>
+      </div>
+      <div class="service-image">😁</div>
+    </div>
+
+    <!-- Service 4 -->
+    <div class="service-detail reverse">
+      <div class="service-info">
+        <div class="icon">✨</div>
+        <h3>Blanqueamiento Dental</h3>
+        <p>Recupera el brillo natural de tu sonrisa con nuestros tratamientos de blanqueamiento profesional, seguros y con resultados visibles desde la primera sesión.</p>
+        <ul>
+          <li>Blanqueamiento en consultorio (láser LED)</li>
+          <li>Blanqueamiento con férulas personalizadas</li>
+          <li>Tratamiento combinado</li>
+          <li>Resultados hasta 8 tonos más claros</li>
+        </ul>
+      </div>
+      <div class="service-image">✨</div>
+    </div>
+
+    <!-- Service 5 -->
+    <div class="service-detail">
+      <div class="service-info">
+        <div class="icon">👑</div>
+        <h3>Carillas & Coronas</h3>
+        <p>Transforma tu sonrisa con carillas de porcelana y coronas dentales diseñadas a la medida. Resultados naturales y estéticamente impecables.</p>
+        <ul>
+          <li>Carillas de porcelana (lentes cerámicos)</li>
+          <li>Carillas de composite</li>
+          <li>Coronas de zirconia y porcelana</li>
+          <li>Diseño digital de sonrisa</li>
+        </ul>
+      </div>
+      <div class="service-image">👑</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <h2>¿Tienes alguna pregunta?</h2>
+    <p>Consulta con nuestros especialistas sin compromiso. Te asesoraremos sobre el mejor tratamiento para ti.</p>
+    <a href="#" class="btn-cta">📱 Escríbenos por WhatsApp</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Centro Odontológico Dentis</h4>
+        <p>Clínica dental de confianza en Puerto La Cruz, Anzoátegui. Más de 15 años creando sonrisas.</p>
+        <p style="margin-top: 1rem;">📞 0414-123.45.67</p>
+        <p>📧 contacto@dentis.com.ve</p>
+      </div>
+      <div>
+        <h4>Servicios</h4>
+        <ul class="footer-links">
+          <li><a href="#">Odontología General</a></li>
+          <li><a href="#">Implantes</a></li>
+          <li><a href="#">Ortodoncia</a></li>
+          <li><a href="#">Blanqueamiento</a></li>
+          <li><a href="#">Carillas</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Horarios</h4>
+        <ul class="footer-links">
+          <li>Lun - Vie: 8:00am - 6:00pm</li>
+          <li>Sábados: 8:00am - 1:00pm</li>
+          <li style="margin-top: 1rem;"><strong>Urgencias:</strong></li>
+          <li>📱 0414-123.45.67</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ubicación</h4>
+        <p>Av. Municipal, CC Barcelona,</p>
+        <p>Piso 2, Oficina 23</p>
+        <p>Puerto La Cruz, Anzoátegui</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Centro Odontológico Dentis C.A. Todos los derechos reservados.
+    </div>
+  </div>
+</footer>
+
+<a href="#" class="whatsapp-float">📱</a>
+
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestro Equipo - Centro Odontológico Dentis</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: #1a1a2e; background: #fff; line-height: 1.6; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+  .header { background: #fff; border-bottom: 1px solid #eef2f6; padding: 1rem 0; position: sticky; top: 0; z-index: 100; }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+  .logo-icon { width: 42px; height: 42px; background: linear-gradient(135deg, #2c7cb0, #1a5f8a); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.3rem; }
+  .logo-text { font-weight: 800; font-size: 1.4rem; color: #1a1a2e; }
+  .logo-text span { color: #2c7cb0; }
+  .logo-slogan { font-size: 0.7rem; color: #888; letter-spacing: 0.5px; }
+  .nav { display: flex; gap: 2rem; align-items: center; }
+  .nav a { text-decoration: none; color: #444; font-weight: 500; font-size: 0.95rem; transition: color 0.2s; }
+  .nav a:hover { color: #2c7cb0; }
+  .nav a.active { color: #2c7cb0; }
+  .btn-whatsapp { display: inline-flex; align-items: center; gap: 0.5rem; background: #25D366; color: white !important; padding: 0.6rem 1.3rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; text-decoration: none; }
+  .btn-whatsapp:hover { opacity: 0.9; }
+
+  .page-header { background: linear-gradient(135deg, #f0f7fb 0%, #e3eef8 100%); padding: 4rem 0; text-align: center; }
+  .page-header h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.75rem; }
+  .page-header h1 span { color: #2c7cb0; }
+  .page-header p { color: #555; font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+  .section { padding: 5rem 0; }
+  .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; }
+  .section-subtitle { color: #666; max-width: 600px; margin-bottom: 3rem; }
+
+  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .team-card { background: #f8fafc; border-radius: 20px; overflow: hidden; border: 1px solid #eef2f6; transition: all 0.3s; text-align: center; }
+  .team-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(44,124,176,0.1); }
+  .team-avatar { width: 100%; height: 260px; background: linear-gradient(135deg, #e3eef8, #d6e6f4); display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+  .team-info { padding: 1.5rem; }
+  .team-info .name { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .team-info .role { color: #2c7cb0; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.75rem; }
+  .team-info .bio { color: #666; font-size: 0.9rem; line-height: 1.6; }
+  .team-socials { display: flex; gap: 0.75rem; justify-content: center; margin-top: 1rem; }
+  .team-socials a { width: 36px; height: 36px; border-radius: 50%; background: #eef2f6; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 0.9rem; transition: all 0.2s; }
+  .team-socials a:hover { background: #2c7cb0; color: white; }
+
+  .team-extra { background: #f8fafc; border-radius: 20px; padding: 2rem; margin-top: 1rem; text-align: center; }
+  .team-extra .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .team-extra h4 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .team-extra p { color: #666; font-size: 0.9rem; }
+
+  .cta { background: linear-gradient(135deg, #2c7cb0, #1a5f8a); color: white; text-align: center; padding: 4rem 0; margin-top: 3rem; }
+  .cta h2 { font-size: 2rem; margin-bottom: 1rem; }
+  .cta p { opacity: 0.9; margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .btn-cta { display: inline-flex; align-items: center; gap: 0.5rem; background: white; color: #2c7cb0; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem; transition: transform 0.2s; }
+  .btn-cta:hover { transform: scale(1.05); }
+
+  .footer { background: #1a1a2e; color: #ccc; padding: 4rem 0 2rem; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer h4 { color: white; font-size: 1rem; margin-bottom: 1.25rem; }
+  .footer p, .footer a { font-size: 0.9rem; color: #999; text-decoration: none; }
+  .footer a:hover { color: #5bb5e8; }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 0.6rem; }
+  .footer-bottom { border-top: 1px solid #333; padding-top: 1.5rem; text-align: center; font-size: 0.85rem; color: #666; }
+
+  .whatsapp-float { position: fixed; bottom: 1.5rem; right: 1.5rem; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 4px 16px rgba(37,211,102,0.35); text-decoration: none; z-index: 1000; transition: transform 0.2s; }
+  .whatsapp-float:hover { transform: scale(1.1); }
+
+  @media (max-width: 768px) {
+    .team-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">🦷</div>
+      <div>
+        <div class="logo-text">CENTRO <span>DENTIS</span></div>
+        <div class="logo-slogan">Te Hace Sonreír</div>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="#">Inicio</a>
+      <a href="#">Servicios</a>
+      <a href="#" class="active">Equipo</a>
+      <a href="#">Contacto</a>
+      <a href="#" class="btn-whatsapp">📱 0414-123.45.67</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="container">
+    <h1>Conoce a nuestro <span>equipo</span></h1>
+    <p>Profesionales altamente capacitados, comprometidos con tu salud bucal y tu sonrisa.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Especialistas Dentis</h2>
+    <p class="section-subtitle">Cada miembro de nuestro equipo aporta experiencia, vocación y calidez humana a tu atención.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">👨‍⚕️</div>
+        <div class="team-info">
+          <div class="name">Dr. José López</div>
+          <div class="role">Director Médico - Cirujano Dentista</div>
+          <div class="bio">Especialista en implantología y rehabilitación oral con más de 18 años de experiencia. Egresado de la Universidad Central de Venezuela.</div>
+          <div class="team-socials">
+            <a href="#">in</a>
+            <a href="#">@</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">👩‍⚕️</div>
+        <div class="team-info">
+          <div class="name">Dra. María Rodríguez</div>
+          <div class="role">Ortodoncista</div>
+          <div class="bio">Especialista en ortodoncia y ortopedia maxilar. Certificada en Invisalign. Apasionada por transformar sonrisas con alineadores invisibles.</div>
+          <div class="team-socials">
+            <a href="#">in</a>
+            <a href="#">@</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">👩‍⚕️</div>
+        <div class="team-info">
+          <div class="name">Dra. Carolina Pérez</div>
+          <div class="role">Endodoncista</div>
+          <div class="bio">Especialista en tratamientos de conducto y microcirugía apical. Experta en procedimientos indoloros con sedación consciente.</div>
+          <div class="team-socials">
+            <a href="#">in</a>
+            <a href="#">@</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">👨‍⚕️</div>
+        <div class="team-info">
+          <div class="name">Dr. Andrés Mendoza</div>
+          <div class="role">Periodoncista</div>
+          <div class="bio">Especialista en encías e implantes. Experto en cirugía periodontal regenerativa y tratamiento de enfermedades de las encías.</div>
+          <div class="team-socials">
+            <a href="#">in</a>
+            <a href="#">@</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">👩‍⚕️</div>
+        <div class="team-info">
+          <div class="name">Dra. Laura Castillo</div>
+          <div class="role">Odontopediatra</div>
+          <div class="bio">Especialista en atención dental infantil. Crea experiencias positivas para que los niños pierdan el miedo al dentista.</div>
+          <div class="team-socials">
+            <a href="#">in</a>
+            <a href="#">@</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">👨‍⚕️</div>
+        <div class="team-info">
+          <div class="name">Dr. Ricardo Fernández</div>
+          <div class="role">Estética Dental</div>
+          <div class="bio">Especialista en diseño de sonrisa, carillas de porcelana y blanqueamiento profesional. Transforma sonrisas con resultados naturales.</div>
+          <div class="team-socials">
+            <a href="#">in</a>
+            <a href="#">@</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-extra" style="margin-top: 3rem;">
+      <div class="icon">👥</div>
+      <h4>+ 6 profesionales de apoyo</h4>
+      <p>Contamos con un equipo de asistentes, higienistas y personal administrativo comprometidos con tu bienestar.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <h2>¿Quieres agendar una consulta?</h2>
+    <p>Nuestro equipo está listo para atenderte. Escríbenos y te asignaremos el especialista ideal para ti.</p>
+    <a href="#" class="btn-cta">📅 Agendar cita</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Centro Odontológico Dentis</h4>
+        <p>Clínica dental de confianza en Puerto La Cruz, Anzoátegui. Más de 15 años creando sonrisas.</p>
+        <p style="margin-top: 1rem;">📞 0414-123.45.67</p>
+        <p>📧 contacto@dentis.com.ve</p>
+      </div>
+      <div>
+        <h4>Servicios</h4>
+        <ul class="footer-links">
+          <li><a href="#">Odontología General</a></li>
+          <li><a href="#">Implantes</a></li>
+          <li><a href="#">Ortodoncia</a></li>
+          <li><a href="#">Blanqueamiento</a></li>
+          <li><a href="#">Carillas</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Horarios</h4>
+        <ul class="footer-links">
+          <li>Lun - Vie: 8:00am - 6:00pm</li>
+          <li>Sábados: 8:00am - 1:00pm</li>
+          <li style="margin-top: 1rem;"><strong>Urgencias:</strong></li>
+          <li>📱 0414-123.45.67</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ubicación</h4>
+        <p>Av. Municipal, CC Barcelona,</p>
+        <p>Piso 2, Oficina 23</p>
+        <p>Puerto La Cruz, Anzoátegui</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Centro Odontológico Dentis C.A. Todos los derechos reservados.
+    </div>
+  </div>
+</footer>
+
+<a href="#" class="whatsapp-float">📱</a>
+
+</body>
+</html>

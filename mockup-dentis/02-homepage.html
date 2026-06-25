@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centro Odontológico Dentis - Inicio</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: #1a1a2e; background: #fff; line-height: 1.6; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* Header */
+  .header { background: #fff; border-bottom: 1px solid #eef2f6; padding: 1rem 0; position: sticky; top: 0; z-index: 100; }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+  .logo-icon { width: 42px; height: 42px; background: linear-gradient(135deg, #2c7cb0, #1a5f8a); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.3rem; }
+  .logo-text { font-weight: 800; font-size: 1.4rem; color: #1a1a2e; }
+  .logo-text span { color: #2c7cb0; }
+  .logo-slogan { font-size: 0.7rem; color: #888; letter-spacing: 0.5px; }
+  .nav { display: flex; gap: 2rem; align-items: center; }
+  .nav a { text-decoration: none; color: #444; font-weight: 500; font-size: 0.95rem; transition: color 0.2s; }
+  .nav a:hover { color: #2c7cb0; }
+  .nav a.active { color: #2c7cb0; }
+  .btn-whatsapp { display: inline-flex; align-items: center; gap: 0.5rem; background: #25D366; color: white !important; padding: 0.6rem 1.3rem; border-radius: 50px; font-weight: 600; font-size: 0.9rem; transition: opacity 0.2s; }
+  .btn-whatsapp:hover { opacity: 0.9; }
+
+  /* Hero */
+  .hero { padding: 5rem 0 4rem; background: linear-gradient(135deg, #f0f7fb 0%, #e3eef8 50%, #d6e6f4 100%); overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .hero h1 { font-size: 2.8rem; line-height: 1.2; font-weight: 800; color: #1a1a2e; margin-bottom: 1rem; }
+  .hero h1 span { color: #2c7cb0; }
+  .hero p { font-size: 1.15rem; color: #555; margin-bottom: 2rem; max-width: 520px; }
+  .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: #2c7cb0; color: white; padding: 0.9rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1rem; transition: background 0.2s; }
+  .btn-primary:hover { background: #1e5f8a; }
+  .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; background: white; color: #2c7cb0; padding: 0.9rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1rem; border: 2px solid #2c7cb0; transition: all 0.2s; }
+  .btn-secondary:hover { background: #f0f7fb; }
+  .hero-image { background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23d6e6f4" rx="20"/><text x="200" y="150" text-anchor="middle" fill="%232c7cb0" font-size="60" font-family="system-ui">🦷</text></svg>') no-repeat center; background-size: contain; min-height: 350px; border-radius: 24px; }
+
+  /* Trust Strip */
+  .trust-strip { background: #1a1a2e; padding: 2rem 0; color: white; }
+  .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; text-align: center; }
+  .trust-item .num { font-size: 1.8rem; font-weight: 800; color: #5bb5e8; }
+  .trust-item .label { font-size: 0.85rem; color: #aaa; margin-top: 0.25rem; }
+
+  /* Sections general */
+  .section { padding: 5rem 0; }
+  .section-title { text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .section-subtitle { text-align: center; color: #666; max-width: 600px; margin: 0 auto 3rem; font-size: 1.05rem; }
+
+  /* Services */
+  .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+  .service-card { background: #f8fafc; border-radius: 16px; padding: 2rem 1.5rem; text-align: center; transition: all 0.3s; border: 1px solid #eef2f6; }
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(44,124,176,0.1); border-color: #2c7cb0; }
+  .service-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .service-card h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
+  .service-card p { font-size: 0.9rem; color: #666; }
+
+  /* About */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .about-image { background: linear-gradient(135deg, #e3eef8, #d6e6f4); border-radius: 24px; min-height: 350px; display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+  .about h2 { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
+  .about p { color: #555; margin-bottom: 1rem; }
+  .about-features { list-style: none; margin-top: 1.5rem; }
+  .about-features li { padding: 0.5rem 0; display: flex; align-items: center; gap: 0.75rem; color: #444; }
+  .about-features li::before { content: "✓"; color: #2c7cb0; font-weight: 700; }
+
+  /* Testimonials */
+  .testimonials { background: #f0f7fb; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .testimonial-card { background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+  .testimonial-stars { color: #f4c542; margin-bottom: 0.75rem; font-size: 1.1rem; }
+  .testimonial-card p { color: #555; font-size: 0.95rem; font-style: italic; margin-bottom: 1rem; }
+  .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+  .testimonial-avatar { width: 44px; height: 44px; border-radius: 50%; background: #e3eef8; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #2c7cb0; }
+  .testimonial-author .name { font-weight: 600; font-size: 0.9rem; }
+  .testimonial-author .role { font-size: 0.8rem; color: #888; }
+
+  /* CTA */
+  .cta { background: linear-gradient(135deg, #2c7cb0, #1a5f8a); color: white; text-align: center; padding: 4rem 0; }
+  .cta h2 { font-size: 2rem; margin-bottom: 1rem; }
+  .cta p { opacity: 0.9; margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .btn-cta { display: inline-flex; align-items: center; gap: 0.5rem; background: white; color: #2c7cb0; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem; transition: transform 0.2s; }
+  .btn-cta:hover { transform: scale(1.05); }
+
+  /* Footer */
+  .footer { background: #1a1a2e; color: #ccc; padding: 4rem 0 2rem; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .footer h4 { color: white; font-size: 1rem; margin-bottom: 1.25rem; }
+  .footer p, .footer a { font-size: 0.9rem; color: #999; text-decoration: none; }
+  .footer a:hover { color: #5bb5e8; }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 0.6rem; }
+  .footer-bottom { border-top: 1px solid #333; padding-top: 1.5rem; text-align: center; font-size: 0.85rem; color: #666; }
+
+  /* WhatsApp Float */
+  .whatsapp-float { position: fixed; bottom: 1.5rem; right: 1.5rem; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 4px 16px rgba(37,211,102,0.35); text-decoration: none; z-index: 1000; transition: transform 0.2s; }
+  .whatsapp-float:hover { transform: scale(1.1); }
+
+  @media (max-width: 768px) {
+    .hero-grid, .about-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .trust-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .nav { display: none; }
+    .hero h1 { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="container header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">🦷</div>
+      <div>
+        <div class="logo-text">CENTRO <span>DENTIS</span></div>
+        <div class="logo-slogan">Te Hace Sonreír</div>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="#" class="active">Inicio</a>
+      <a href="#">Servicios</a>
+      <a href="#">Equipo</a>
+      <a href="#">Contacto</a>
+      <a href="#" class="btn-whatsapp">📱 0414-123.45.67</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <h1>Tu sonrisa es <span>nuestra prioridad</span></h1>
+      <p>En Centro Odontológico Dentis combinamos tecnología de punta con un trato cálido y profesional para brindarte la mejor experiencia dental en Puerto La Cruz.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn-primary">📅 Agendar cita</a>
+        <a href="#" class="btn-secondary">Conoce más</a>
+      </div>
+    </div>
+    <div class="hero-image"></div>
+  </div>
+</section>
+
+<!-- Trust Strip -->
+<section class="trust-strip">
+  <div class="container trust-grid">
+    <div class="trust-item">
+      <div class="num">+15</div>
+      <div class="label">Años de experiencia</div>
+    </div>
+    <div class="trust-item">
+      <div class="num">+8,000</div>
+      <div class="label">Pacientes atendidos</div>
+    </div>
+    <div class="trust-item">
+      <div class="num">+12</div>
+      <div class="label">Especialistas</div>
+    </div>
+    <div class="trust-item">
+      <div class="num">98%</div>
+      <div class="label">Satisfacción</div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Nuestros Servicios</h2>
+    <p class="section-subtitle">Ofrecemos una amplia gama de procedimientos odontológicos con los más altos estándares de calidad.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🦷</div>
+        <h3>Odontología General</h3>
+        <p>Limpiezas, chequeos, calzas y tratamientos preventivos.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⭐</div>
+        <h3>Implantes</h3>
+        <p>Restauración funcional y estética con implantes de última generación.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🦷</div>
+        <h3>Ortodoncia</h3>
+        <p>Invisalign y brackets tradicionales para una sonrisa alineada.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">✨</div>
+        <h3>Blanqueamiento</h3>
+        <p>Tratamientos profesionales para una sonrisa más brillante.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">👑</div>
+        <h3>Carillas & Coronas</h3>
+        <p>Restauración estética con carillas de porcelana y coronas.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔧</div>
+        <h3>Puentes Dentales</h3>
+        <p>Solución fija para reemplazar dientes perdidos.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🦷</div>
+        <h3>Endodoncia</h3>
+        <p>Tratamientos de conducto indoloros y efectivos.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">😁</div>
+        <h3>Estética Dental</h3>
+        <p>Diseño de sonrisa personalizado para cada paciente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="section" style="background: #f8fafc;">
+  <div class="container about-grid">
+    <div class="about-image">🏥</div>
+    <div class="about">
+      <h2>Por qué elegir Dentis</h2>
+      <p>En Centro Odontológico Dentis nos apasiona crear sonrisas saludables y hermosas. Nuestro equipo de especialistas trabaja con tecnología de vanguardia para ofrecerte tratamientos cómodos, seguros y efectivos.</p>
+      <p>Ubicados en Puerto La Cruz, estado Anzoátegui, somos la clínica dental de confianza para cientos de familias de la región.</p>
+      <ul class="about-features">
+        <li>Tecnología digital de última generación</li>
+        <li>Ambiente cómodo y libre de estrés</li>
+        <li>Planes de financiamiento accesibles</li>
+        <li>Urgencias atendidas el mismo día</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section testimonials">
+  <div class="container">
+    <h2 class="section-title">Lo que dicen nuestros pacientes</h2>
+    <p class="section-subtitle">La satisfacción de nuestros pacientes es nuestro mejor respaldo.</p>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>"Excelente atención, desde que entras te hacen sentir en confianza. Mi tratamiento de conducto fue totalmente indoloro. Muy recomendados."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MC</div>
+          <div>
+            <div class="name">María C.</div>
+            <div class="role">Paciente desde 2020</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>"Me hicieron un blanqueamiento y el resultado superó mis expectativas. El trato del Dr. López es increíble, muy profesional y amable."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JR</div>
+          <div>
+            <div class="name">José R.</div>
+            <div class="role">Paciente desde 2022</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>"Toda mi familia se atiende en Dentis. Los niños no le tienen miedo al dentista gracias al trato tan especial que les dan. 100% recomendado."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AG</div>
+          <div>
+            <div class="name">Ana G.</div>
+            <div class="role">Paciente desde 2018</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container">
+    <h2>¿Listo para transformar tu sonrisa?</h2>
+    <p>Agenda tu cita hoy y descubre por qué cientos de pacientes confían en Centro Odontológico Dentis.</p>
+    <a href="#" class="btn-cta">📅 Reserva tu cita</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Centro Odontológico Dentis</h4>
+        <p>Clínica dental de confianza en Puerto La Cruz, Anzoátegui. Más de 15 años creando sonrisas saludables y hermosas.</p>
+        <p style="margin-top: 1rem;">📞 0414-123.45.67</p>
+        <p>📧 contacto@dentis.com.ve</p>
+      </div>
+      <div>
+        <h4>Servicios</h4>
+        <ul class="footer-links">
+          <li><a href="#">Odontología General</a></li>
+          <li><a href="#">Implantes</a></li>
+          <li><a href="#">Ortodoncia</a></li>
+          <li><a href="#">Blanqueamiento</a></li>
+          <li><a href="#">Carillas</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Horarios</h4>
+        <ul class="footer-links">
+          <li>Lun - Vie: 8:00am - 6:00pm</li>
+          <li>Sábados: 8:00am - 1:00pm</li>
+          <li style="margin-top: 1rem;"><strong>Urgencias:</strong></li>
+          <li>📱 0414-123.45.67</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ubicación</h4>
+        <p>Av. Municipal, CC Barcelona,</p>
+        <p>Piso 2, Oficina 23</p>
+        <p>Puerto La Cruz, Anzoátegui</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Centro Odontológico Dentis C.A. Todos los derechos reservados.
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="#" class="whatsapp-float">📱</a>
+
+</body>
+</html>

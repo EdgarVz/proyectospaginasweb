@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dentis - Elegir Enfoque Visual</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: #f5f7fa; padding: 3rem 1.5rem; color: #333; }
+  h1 { text-align: center; font-size: 2rem; margin-bottom: 0.5rem; }
+  .subtitle { text-align: center; color: #666; margin-bottom: 2.5rem; font-size: 1.1rem; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
+  .card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08); cursor: pointer; transition: all 0.2s; border: 3px solid transparent; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+  .card.selected { border-color: #2c7cb0; box-shadow: 0 0 0 3px rgba(44,124,176,0.2); }
+  .card-image { min-height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
+  .card-body { padding: 1.5rem; }
+  .card-body h3 { margin-bottom: 0.75rem; font-size: 1.2rem; }
+  .card-body p { color: #555; line-height: 1.6; font-size: 0.95rem; margin-bottom: 0.4rem; }
+  .badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-top: 0.75rem; }
+  .btn { display: block; margin: 2rem auto 0; padding: 0.9rem 2.5rem; background: #2c7cb0; color: white; border: none; border-radius: 8px; font-size: 1.1rem; cursor: pointer; font-weight: 600; }
+  .btn:hover { background: #1e5f8a; }
+  .logo-placeholder { background: white; border-radius: 8px; padding: 0.5rem 1.5rem; display: inline-block; text-align: center; }
+</style>
+</head>
+<body>
+  <h1>🦷 Centro Odontológico Dentis</h1>
+  <p class="subtitle">Elige la dirección visual para el nuevo sitio web</p>
+
+  <div class="cards">
+    <div class="card" onclick="selectCard(this, 'clinico')">
+      <div class="card-image" style="background: linear-gradient(135deg, #e8f4f8 0%, #b8d4e8 100%);">
+        <div style="font-size: 3rem; margin-bottom: 0.8rem;">🦷</div>
+        <div class="logo-placeholder">
+          <div style="font-weight: 800; color: #2c7cb0; font-size: 1.1rem;">DENTIS</div>
+          <div style="font-size: 0.75rem; color: #666;">Te Hace Sonreír</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h3>🏥 Clínico & Moderno</h3>
+        <p><strong>Colores:</strong> Blanco, azul celeste (#2c7cb0), verde agua</p>
+        <p><strong>Vibra:</strong> Higiene, profesionalismo, tecnología de punta</p>
+        <p><strong>Ideal para:</strong> Transmitir confianza y precisión médica</p>
+        <div class="badge" style="background: #e8f4f8; color: #2c7cb0;">RECOMENDADO</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="selectCard(this, 'calido')">
+      <div class="card-image" style="background: linear-gradient(135deg, #fdf6e3 0%, #f5d6a8 100%);">
+        <div style="font-size: 3rem; margin-bottom: 0.8rem;">😊</div>
+        <div class="logo-placeholder">
+          <div style="font-weight: 800; color: #c4883c; font-size: 1.1rem;">DENTIS</div>
+          <div style="font-size: 0.75rem; color: #666;">Te Hace Sonreír</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h3>🌅 Cálido & Humano</h3>
+        <p><strong>Colores:</strong> Blanco, terracota, naranja suave (#c4883c)</p>
+        <p><strong>Vibra:</strong> Cercanía, familia, confianza personal</p>
+        <p><strong>Ideal para:</strong> Conectar emocionalmente con los pacientes</p>
+      </div>
+    </div>
+
+    <div class="card" onclick="selectCard(this, 'premium')">
+      <div class="card-image" style="background: linear-gradient(135deg, #f5f0eb 0%, #d4c5a9 100%);">
+        <div style="font-size: 3rem; margin-bottom: 0.8rem;">✨</div>
+        <div class="logo-placeholder" style="border: 1px solid #c9a84c;">
+          <div style="font-weight: 800; color: #8a7332; font-size: 1.1rem;">DENTIS</div>
+          <div style="font-size: 0.75rem; color: #666;">Te Hace Sonreír</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h3>⭐ Premium & Elegante</h3>
+        <p><strong>Colores:</strong> Blanco, dorado (#c9a84c), negro, crema</p>
+        <p><strong>Vibra:</strong> Exclusividad, alta calidad, lujo</p>
+        <p><strong>Ideal para:</strong> Estética dental premium, carillas, Invisalign</p>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn" onclick="confirmSelection()">Confirmar selección</button>
+
+  <script>
+    let selected = null;
+    function selectCard(el, value) {
+      document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      selected = value;
+    }
+    function confirmSelection() {
+      if (!selected) { alert('Por favor selecciona un enfoque visual primero.'); return; }
+      const names = { clinico: 'Clínico & Moderno', calido: 'Cálido & Humano', premium: 'Premium & Elegante' };
+      alert('Seleccionaste: ' + names[selected] + '\n\nAvísame en el chat cuál elegiste para que genere los mockups completos.');
+    }
+  </script>
+</body>
+</html>

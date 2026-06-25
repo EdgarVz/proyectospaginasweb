@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">Leads</h2>
+<div class="bg-white p-4 rounded shadow mb-4 flex gap-3" x-data="{ country: '', category: '', minScore: 0, status: '' }">
+    <select x-model="country" @change="$dispatch('filter')" class="border p-2 rounded">
+        <option value="">Todos los países</option>
+        <option value="Venezuela">Venezuela</option>
+        <option value="Uruguay">Uruguay</option>
+    </select>
+    <select x-model="category" @change="$dispatch('filter')" class="border p-2 rounded">
+        <option value="">Todas las categorías</option>
+        <option value="restaurante">Restaurante</option>
+        <option value="clinica">Clínica</option>
+        <option value="taller">Taller</option>
+        <option value="gimnasio">Gimnasio</option>
+        <option value="hotel">Hotel</option>
+        <option value="inmobiliaria">Inmobiliaria</option>
+        <option value="tienda">Tienda</option>
+        <option value="otro">Otro</option>
+    </select>
+    <select x-model="minScore" @change="$dispatch('filter')" class="border p-2 rounded">
+        <option value="0">Todos los scores</option>
+        <option value="70">Urgentes (>70)</option>
+        <option value="40">Medios (>40)</option>
+    </select>
+    <select x-model="status" @change="$dispatch('filter')" class="border p-2 rounded">
+        <option value="">Todos los estados</option>
+        <option value="pending">Pendiente</option>
+        <option value="done">Analizado</option>
+        <option value="error">Error</option>
+    </select>
+    <a href="/leads/export" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 ml-auto">Exportar CSV</a>
+</div>
+<div id="leads-table" hx-get="/leads" hx-trigger="filter from:window" hx-target="#leads-table" hx-include="select[name]">
+    <div class="bg-white rounded shadow overflow-x-auto">
+        <table class="w-full">
+            <thead>
+                <tr class="border-b bg-gray-50">
+                    <th class="text-left p-3">Nombre</th>
+                    <th class="text-left p-3">Web</th>
+                    <th class="text-left p-3">País</th>
+                    <th class="text-left p-3">Categoría</th>
+                    <th class="text-left p-3">Score</th>
+                    <th class="text-left p-3">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lead in leads %}
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="p-3"><a href="/leads/{{ lead.id }}" class="text-blue-600">{{ lead.name }}</a></td>
+                    <td class="p-3 text-sm truncate max-w-xs">{{ lead.website }}</td>
+                    <td class="p-3">{{ lead.country }}</td>
+                    <td class="p-3">{{ lead.category }}</td>
+                    <td class="p-3">
+                        {% if lead.lead_score is not none %}
+                        <span class="px-2 py-1 rounded text-white text-sm
+                            {% if lead.lead_score > 70 %}bg-red-500
+                            {% elif lead.lead_score > 40 %}bg-yellow-500
+                            {% else %}bg-green-500{% endif %}">
+                            {{ "%.0f"|format(lead.lead_score) }}
+                        </span>
+                        {% else %}
+                        <span class="text-gray-400">-</span>
+                        {% endif %}
+                    </td>
+                    <td class="p-3">{{ lead.audit_status or 'pending' }}</td>
+                </tr>
+                {% else %}
+                <tr><td colspan="6" class="p-3 text-gray-500">No hay leads aún</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

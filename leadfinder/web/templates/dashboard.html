@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">Dashboard</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+    <div class="bg-white p-4 rounded shadow">
+        <div class="text-3xl font-bold text-blue-600">{{ summary.total_leads }}</div>
+        <div class="text-gray-500 text-sm">Total Leads</div>
+    </div>
+    <div class="bg-white p-4 rounded shadow">
+        <div class="text-3xl font-bold text-red-600">{{ summary.urgent_leads }}</div>
+        <div class="text-gray-500 text-sm">Urgentes (score > 70)</div>
+    </div>
+    <div class="bg-white p-4 rounded shadow">
+        <div class="text-3xl font-bold text-yellow-600">{{ summary.pending_audits }}</div>
+        <div class="text-gray-500 text-sm">Pendientes de Análisis</div>
+    </div>
+    <div class="bg-white p-4 rounded shadow">
+        <div class="text-3xl font-bold text-green-600">{{ summary.total_leads - summary.urgent_leads }}</div>
+        <div class="text-gray-500 text-sm">No Urgentes</div>
+    </div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="bg-white p-4 rounded shadow">
+        <h3 class="font-semibold mb-2">Por País</h3>
+        <ul>
+            {% for country, count in (summary.by_country or {}).items() %}
+            <li class="flex justify-between py-1 border-b">{{ country }} <span class="font-bold">{{ count }}</span></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="bg-white p-4 rounded shadow">
+        <h3 class="font-semibold mb-2">Por Categoría</h3>
+        <ul>
+            {% for cat, count in (summary.by_category or {}).items() %}
+            <li class="flex justify-between py-1 border-b">{{ cat }} <span class="font-bold">{{ count }}</span></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

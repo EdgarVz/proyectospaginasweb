@@ -13,7 +13,7 @@ def main():
 
     run_parser = subparsers.add_parser("run", help="Run a scraping campaign")
     run_parser.add_argument("--campaign", required=True)
-    run_parser.add_argument("--keyword", required=True)
+    run_parser.add_argument("--keyword", required=True, help="Comma-separated list of keywords")
     run_parser.add_argument("--location", required=True)
     run_parser.add_argument("--country", default="Venezuela")
     run_parser.add_argument("--radius", type=int, default=5000)

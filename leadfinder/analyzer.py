@@ -58,7 +58,8 @@ class Analyzer:
 
             raw = stdout.decode("utf-8", errors="replace")
             if not raw.strip():
-                raise RuntimeError(f"Lighthouse produced no output: {stderr.decode(errors='replace')[:500]}")
+                err_text = stderr.decode("utf-8", errors="replace")[:300]
+                raise RuntimeError(f"Lighthouse produced no output: {err_text}")
 
             data = json.loads(raw)
             categories = data.get("categories", {})

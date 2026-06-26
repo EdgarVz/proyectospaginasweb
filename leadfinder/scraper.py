@@ -18,7 +18,7 @@ class Scraper:
         for place in results:
             detail = self._client.place(
                 place_id=place["place_id"],
-                fields=["website", "formatted_phone_number", "formatted_address"],
+                fields=["website", "formatted_phone_number", "formatted_address", "address_components"],
             )
             detail_result = detail.get("result", {})
 

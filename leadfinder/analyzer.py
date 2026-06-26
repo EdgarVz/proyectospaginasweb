@@ -1,6 +1,7 @@
 import asyncio
 import json
 import re
+import sys
 
 import httpx
 from bs4 import BeautifulSoup
@@ -27,35 +28,53 @@ class Analyzer:
 
         return metrics
 
+    @staticmethod
+    def _find_lighthouse() -> str:
+        if sys.platform == "win32":
+            import shutil
+            lh = shutil.which("lighthouse.cmd") or shutil.which("lighthouse")
+            if lh:
+                return lh
+        return "lighthouse"
+
     async def _run_lighthouse(self, url: str) -> dict:
+        lighthouse_cmd = self._find_lighthouse()
         try:
             proc = await asyncio.create_subprocess_exec(
-                "lighthouse",
+                lighthouse_cmd,
                 url,
-                "--chrome-flags=--headless",
+                "--chrome-flags=--headless --no-sandbox",
                 "--output=json",
+                "--output-path=stdout",
                 "--quiet",
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
             )
             try:
-                stdout, stderr = await asyncio.wait_for(proc.communicate(), timeout=60)
+                stdout, stderr = await asyncio.wait_for(proc.communicate(), timeout=90)
             except asyncio.TimeoutError:
                 proc.kill()
                 raise RuntimeError("Lighthouse timed out")
 
-            if proc.returncode != 0:
-                raise RuntimeError(f"Lighthouse failed: {stderr.decode(errors='replace')}")
+            raw = stdout.decode("utf-8", errors="replace")
+            if not raw.strip():
+                raise RuntimeError(f"Lighthouse produced no output: {stderr.decode(errors='replace')[:500]}")
 
-            data = json.loads(stdout.decode("utf-8"))
+            data = json.loads(raw)
             categories = data.get("categories", {})
 
+            def _cat_score(name: str) -> float:
+                raw = categories.get(name, {}).get("score")
+                return round(raw * 100) if raw is not None else 0
+
             return {
-                "performance_score": round(categories.get("performance", {}).get("score", 0) * 100),
-                "accessibility_score": round(categories.get("accessibility", {}).get("score", 0) * 100),
-                "seo_score": round(categories.get("seo", {}).get("score", 0) * 100),
-                "best_practices_score": round(categories.get("best-practices", {}).get("score", 0) * 100),
+                "performance_score": _cat_score("performance"),
+                "accessibility_score": _cat_score("accessibility"),
+                "seo_score": _cat_score("seo"),
+                "best_practices_score": _cat_score("best-practices"),
             }
+        except (json.JSONDecodeError, ValueError) as e:
+            raise RuntimeError(f"Lighthouse output error: {e}")
         except FileNotFoundError:
             raise RuntimeError("Lighthouse not found. Install: npm install -g lighthouse")
 

@@ -14,6 +14,7 @@ class Scraper:
         )
         results = places_resp.get("results", [])
 
+        seen_websites = set()
         businesses = []
         for place in results:
             detail = self._client.place(
@@ -23,8 +24,9 @@ class Scraper:
             detail_result = detail.get("result", {})
 
             website = detail_result.get("website")
-            if not website:
+            if not website or website in seen_websites:
                 continue
+            seen_websites.add(website)
 
             rating = place.get("rating")
             if min_rating is not None and (rating is None or rating < min_rating):

@@ -38,12 +38,12 @@ class Database:
             category    TEXT,
             city        TEXT,
             country     TEXT,
-            place_id    TEXT UNIQUE,
+            place_id    TEXT,
             created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
         CREATE TABLE IF NOT EXISTS audits (
             id              INTEGER PRIMARY KEY AUTOINCREMENT,
-            business_id     INTEGER NOT NULL UNIQUE REFERENCES businesses(id),
+            business_id     INTEGER NOT NULL REFERENCES businesses(id),
             status          TEXT NOT NULL DEFAULT 'pending',
             lighthouse_json TEXT,
             error_message   TEXT,

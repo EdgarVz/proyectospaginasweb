@@ -1,52 +1,56 @@
 {% extends "base.html" %}
 {% block content %}
+{% set metrics_dict = {} %}
+{% for m in metrics %}
+{%   set _ = metrics_dict.update({m.metric_name: m}) %}
+{% endfor %}
 <div class="bg-white p-6 rounded shadow">
-    <h2 class="text-2xl font-bold mb-2">{{ lead.name }}</h2>
-    <p class="text-gray-500 mb-4">{{ lead.address }} — {{ lead.city }}, {{ lead.country }}</p>
+    <h2 class="text-2xl font-bold mb-2">{{ business.name }}</h2>
+    <p class="text-gray-500 mb-4">{{ business.address }} — {{ business.city }}, {{ business.country }}</p>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <div>
-            <p><strong>Web:</strong> <a href="{{ lead.website }}" target="_blank" class="text-blue-600">{{ lead.website }}</a></p>
-            <p><strong>Teléfono:</strong> {{ lead.phone or '-' }}</p>
-            <p><strong>Rating Google:</strong> {{ lead.rating or '-' }}</p>
-            <p><strong>Categoría:</strong> {{ lead.category or '-' }}</p>
+            <p><strong>Web:</strong> <a href="{{ business.website }}" target="_blank" class="text-blue-600">{{ business.website }}</a></p>
+            <p><strong>Teléfono:</strong> {{ business.phone or '-' }}</p>
+            <p><strong>Rating Google:</strong> {{ business.rating or '-' }}</p>
+            <p><strong>Categoría:</strong> {{ business.category or '-' }}</p>
         </div>
         <div>
-            {% if metrics and metrics.get('lead_score') %}
+            {% if metrics_dict.get('lead_score') %}
             <p><strong>Lead Score:</strong>
                 <span class="px-2 py-1 rounded text-white
-                    {% if metrics.lead_score.score > 70 %}bg-red-500
-                    {% elif metrics.lead_score.score > 40 %}bg-yellow-500
+                    {% if metrics_dict.lead_score.score > 70 %}bg-red-500
+                    {% elif metrics_dict.lead_score.score > 40 %}bg-yellow-500
                     {% else %}bg-green-500{% endif %}">
-                    {{ "%.0f"|format(metrics.lead_score.score) }}
+                    {{ "%.0f"|format(metrics_dict.lead_score.score) }}
                 </span>
             </p>
             {% endif %}
         </div>
     </div>
-    {% if metrics %}
+    {% if metrics_dict %}
     <h3 class="font-semibold text-lg mb-2">Métricas de Auditoría</h3>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
         {% for key, label in [('performance_score', 'Performance'), ('seo_score', 'SEO'), ('best_practices_score', 'Best Practices'), ('accessibility_score', 'Accesibilidad')] %}
-        {% if key in metrics %}
+        {% if key in metrics_dict %}
         <div class="bg-gray-50 p-3 rounded">
             <div class="text-sm text-gray-500">{{ label }}</div>
-            <div class="text-xl font-bold">{{ "%.0f"|format(metrics[key].score) }}</div>
+            <div class="text-xl font-bold">{{ "%.0f"|format(metrics_dict[key].score) }}</div>
         </div>
         {% endif %}
         {% endfor %}
     </div>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
         {% for key, label in [('mobile_friendly', 'Mobile Friendly'), ('has_meta_description', 'Meta Desc'), ('has_open_graph', 'Open Graph'), ('has_ssl', 'HTTPS')] %}
-        {% if key in metrics %}
+        {% if key in metrics_dict %}
         <div class="bg-gray-50 p-3 rounded">
             <div class="text-sm text-gray-500">{{ label }}</div>
-            <div class="text-xl">{% if metrics[key].score == 1 %}✅{% else %}❌{% endif %}</div>
+            <div class="text-xl">{% if metrics_dict[key].score == 1 %}✅{% else %}❌{% endif %}</div>
         </div>
         {% endif %}
         {% endfor %}
     </div>
-    {% if metrics.technologies and metrics.technologies.details %}
-    <p><strong>Tecnologías:</strong> {{ metrics.technologies.details }}</p>
+    {% if metrics_dict.technologies and metrics_dict.technologies.details %}
+    <p><strong>Tecnologías:</strong> {{ metrics_dict.technologies.details }}</p>
     {% endif %}
     {% endif %}
 </div>

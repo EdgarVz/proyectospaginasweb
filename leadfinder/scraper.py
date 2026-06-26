@@ -18,7 +18,7 @@ class Scraper:
         for place in results:
             detail = self._client.place(
                 place_id=place["place_id"],
-                fields=["website", "formatted_phone_number", "formatted_address", "address_components"],
+                fields=["website", "formatted_phone_number", "formatted_address", "address_component"],
             )
             detail_result = detail.get("result", {})
 
@@ -30,7 +30,7 @@ class Scraper:
             if min_rating is not None and (rating is None or rating < min_rating):
                 continue
 
-            address_components = detail_result.get("address_components", [])
+            address_components = detail_result.get("address_component", [])
 
             businesses.append({
                 "name": place.get("name", ""),

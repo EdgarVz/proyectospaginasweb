@@ -17,6 +17,9 @@ def main():
     run_parser.add_argument("--location", required=True)
     run_parser.add_argument("--country", default="Venezuela")
     run_parser.add_argument("--radius", type=int, default=5000)
+    run_parser.add_argument("--min-rating", type=float, default=None)
+    run_parser.add_argument("--exclude-domain", action="append", dest="exclude_domains", default=[])
+    run_parser.add_argument("--broad", action="store_true", help="Fetch all establishments (uses places_nearby)")
     run_parser.add_argument("--analyze", action="store_true")
 
     serve_parser = subparsers.add_parser("serve", help="Start web dashboard")
@@ -43,7 +46,11 @@ async def run_campaign(args):
     )
     print(f"Created campaign #{campaign_id}: {args.campaign}")
     scraper = Scraper(api_key=settings.google_places_api_key)
-    businesses = await scraper.run(keyword=args.keyword, location=args.location, radius=args.radius)
+    businesses = await scraper.run(
+        keyword=args.keyword, location=args.location, radius=args.radius,
+        min_rating=args.min_rating, exclude_domains=args.exclude_domains or None,
+        broad=args.broad,
+    )
     print(f"Found {len(businesses)} businesses with websites")
     for b in businesses:
         bid = await db.create_business(campaign_id=campaign_id, **b)

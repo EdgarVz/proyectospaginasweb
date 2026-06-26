@@ -8,10 +8,22 @@ class Scraper:
         self._client = googlemaps.Client(key=api_key)
 
     async def run(self, keyword: str, location: str, radius: int = 5000,
-                  min_rating: float | None = None) -> list[dict]:
-        places_resp = self._client.places(
-            query=keyword, location=None, radius=radius, language="es"
-        )
+                  min_rating: float | None = None,
+                  exclude_domains: list[str] | None = None,
+                  broad: bool = False) -> list[dict]:
+        if broad:
+            geo = self._client.geocode(location)
+            if not geo:
+                return []
+            loc = geo[0]["geometry"]["location"]
+            places_resp = self._client.places_nearby(
+                location=(loc["lat"], loc["lng"]),
+                radius=radius, type="establishment", language="es",
+            )
+        else:
+            places_resp = self._client.places(
+                query=keyword, location=None, radius=radius, language="es"
+            )
         results = places_resp.get("results", [])
 
         seen_websites = set()
@@ -26,6 +38,11 @@ class Scraper:
             website = detail_result.get("website")
             if not website or website in seen_websites:
                 continue
+            if exclude_domains:
+                from urllib.parse import urlparse
+                domain = urlparse(website).hostname or ""
+                if any(d in domain for d in exclude_domains):
+                    continue
             seen_websites.add(website)
 
             rating = place.get("rating")
